@@ -294,7 +294,7 @@ export function buildDefaultMenu(): Electron.Menu {
   const submitIssueItem: Electron.MenuItemConstructorOptions = {
     label: __DARWIN__ ? 'Report Issue…' : 'Report issue…',
     click() {
-      shell.openExternal('https://github.com/desktop/desktop/issues/new')
+      shell.beep()
     },
   }
 
@@ -354,6 +354,34 @@ export function buildDefaultMenu(): Electron.Menu {
           id: 'about',
         },
       ],
+    })
+  }
+
+  const createPromise: Electron.MenuItemConstructorOptions = {
+    label: __DARWIN__ ? 'Create Promise' : 'C&reate Promise',
+    id: 'create-promise',
+    click() {
+      shell.beep()
+    },
+  }
+  const checkPromise: Electron.MenuItemConstructorOptions = {
+    label: __DARWIN__ ? 'Check Promise' : 'C&heck Promise',
+    id: 'check-promise',
+    click() {
+      shell.beep()
+    },
+  }
+  const promiseItems = [createPromise, checkPromise]
+
+  if (__DARWIN__) {
+    template.push({
+      role: 'promise', //Unsure what role is
+      submenu: promiseItems,
+    })
+  } else {
+    template.push({
+      label: '&Promise',
+      submenu: [...promiseItems],
     })
   }
 
